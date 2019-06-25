@@ -987,7 +987,6 @@ export default class VideoPlayer extends Component {
      * Render the seekbar and attach its handlers
      */
     renderSeekbar() {
-
         return (
             <View style={styles.seekbar.container}>
                 <View
@@ -1009,6 +1008,16 @@ export default class VideoPlayer extends Component {
                     ]}
                     {...this.player.seekPanResponder.panHandlers}
                 >
+                    {this.state.seeking && (
+                        <Text style={{
+                            color: '#fff',
+                            position: 'absolute',
+                            top: -8,
+                            fontSize: 10,
+                        }}>
+                            {this.formatTime(this.calculateTimeFromSeekerPosition())}
+                        </Text>
+                    )}
                     <View style={[
                         styles.seekbar.circle,
                         { backgroundColor: this.props.seekColor || '#FFF' }]}
@@ -1338,8 +1347,8 @@ const styles = {
         handle: {
             position: 'absolute',
             marginLeft: -7,
-            height: 28,
-            width: 28,
+            height: 30,
+            width: 30,
         },
         circle: {
             borderRadius: 18,
